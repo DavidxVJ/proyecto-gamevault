@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:16 #descarga la imagen oficial de Postgres
+    container_name: gamevault-db
+    environment: #define BD, user y pass que se crean automaticamente al arrancar
+      POSTGRES_DB: gamevault
+      POSTGRES_USER: gamevault_user
+      POSTGRES_PASSWORD: gamevault_pass
+    ports:
+      - "5432:5432" #conecta puerto 5432 de mi maquina al puerto 5432 del contenedor (puerto default Postgres)
+    volumes: #para que los datos no se borren cada vez que apague el contenedor
+      - gamevault_data:/var/lib/postgresql/data
+
+volumes:
+  gamevault_data:
+
+#procederemos a ejecutar docker -> docker compose up -d
+#podemos ver si esta corriendo -> docker ps (STATUS = UP)
