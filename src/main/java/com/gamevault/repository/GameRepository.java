@@ -1,3 +1,4 @@
+//Acceso a la BD. CRUD.
 package com.gamevault.repository;
 
 import com.gamevault.model.Game;

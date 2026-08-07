@@ -1,3 +1,4 @@
+//Representacion de las tablas de mi BD.
 package com.gamevault.model;
 
 import jakarta.persistence.*;

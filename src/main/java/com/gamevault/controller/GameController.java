@@ -1,3 +1,4 @@
+//Puerta de entrada para las peticiones HTTP (GET, POST, PUT, DELETE).
 package com.gamevault.controller;
 
 import com.gamevault.model.Game;

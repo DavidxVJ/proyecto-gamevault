@@ -1,3 +1,4 @@
+//Cerebro de la app. Reglas, validaciones, calculos, etc.
 package com.gamevault.service;
 
 import com.gamevault.model.Game;
