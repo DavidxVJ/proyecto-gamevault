@@ -1,0 +1,11 @@
+#POST http://localhost:8080/api/games
+#Content-Type: application/json
+
+#{
+#  "title": "Elden Ring",
+#  "developer": "FromSoftware",
+#  "releaseYear": 2022,
+#  "description": "Un souls-like de mundo abierto"
+#}
+
+GET http://localhost:8080/api/games
