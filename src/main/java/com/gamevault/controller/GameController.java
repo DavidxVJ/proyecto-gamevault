@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController //combina @Controller + @ResponseBody. Le dice a Spring "esta clase maneja peticiones HTTP y devuelve directamente datos (JSON), no vistas HTML"
 @RequestMapping("/api/games") //prefijo de ruta para todos los endpoints de esta clase
@@ -43,5 +44,15 @@ public class GameController {
     @ResponseStatus(HttpStatus.NO_CONTENT) //por defecto Spring devuelve 200 OK en todo. Aquí somos explícitos: crear devuelve 201 (Created), eliminar devuelve 204 (No Content)
     public void deleteGame(@PathVariable Long id) {
         gameService.delete(id);
+    }
+
+    @PutMapping("/{id}/platforms")
+    public Game assignPlatforms(@PathVariable Long id, @RequestBody Set<Long> platformIds) {
+        return gameService.assignPlatforms(id, platformIds);
+    }
+
+    @PutMapping("/{id}/genres")
+    public Game assignGenres(@PathVariable Long id, @RequestBody Set<Long> genreIds) {
+        return gameService.assignGenres(id, genreIds);
     }
 }

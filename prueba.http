@@ -8,4 +8,18 @@
 #  "description": "Un souls-like de mundo abierto"
 #}
 
+#GET http://localhost:8080/api/genres
+
+#POST http://localhost:8080/api/genres
+#Content-Type: application/json
+
+#{
+#  "name": "Accion"
+#}
+
+#PUT http://localhost:8080/api/games/1/platforms
+#Content-Type: application/json
+
+#[1, 2]
+
 GET http://localhost:8080/api/games
