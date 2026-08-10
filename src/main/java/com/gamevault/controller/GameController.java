@@ -1,6 +1,8 @@
 //Puerta de entrada para las peticiones HTTP (GET, POST, PUT, DELETE).
 package com.gamevault.controller;
 
+import com.gamevault.dto.GameMapper;
+import com.gamevault.dto.GameResponse;
 import com.gamevault.model.Game;
 import com.gamevault.service.GameService;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController //combina @Controller + @ResponseBody. Le dice a Spring "esta clase maneja peticiones HTTP y devuelve directamente datos (JSON), no vistas HTML"
 @RequestMapping("/api/games") //prefijo de ruta para todos los endpoints de esta clase
@@ -20,24 +23,26 @@ public class GameController {
     }
 
     @GetMapping
-    public List<Game> getAllGames() {
-        return gameService.findAll();
+    public List<GameResponse> getAllGames() {
+        return gameService.findAll().stream()
+                .map(GameMapper::toResponse) //GameMapper::toResponse es una referencia a método equivalente a escribir .map(game -> GameMapper.toResponse(game)), pero más limpio. Es azúcar sintáctica.
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Game getGameById(@PathVariable Long id) { //PV extrae el valor de la URL (ej. el 5 en /api/games/5)
-        return gameService.findById(id);
+    public GameResponse getGameById(@PathVariable Long id) {
+        return GameMapper.toResponse(gameService.findById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Game createGame(@RequestBody Game game) { //RB convierte el JSON que llega en el cuerpo de la petición en un objeto Game automáticamente
-        return gameService.create(game);
+    public GameResponse createGame(@RequestBody Game game) {
+        return GameMapper.toResponse(gameService.create(game));
     }
 
     @PutMapping("/{id}")
-    public Game updateGame(@PathVariable Long id, @RequestBody Game game) {
-        return gameService.update(id, game);
+    public GameResponse updateGame(@PathVariable Long id, @RequestBody Game game) {
+        return GameMapper.toResponse(gameService.update(id, game));
     }
 
     @DeleteMapping("/{id}")
@@ -47,12 +52,12 @@ public class GameController {
     }
 
     @PutMapping("/{id}/platforms")
-    public Game assignPlatforms(@PathVariable Long id, @RequestBody Set<Long> platformIds) {
-        return gameService.assignPlatforms(id, platformIds);
+    public GameResponse assignPlatforms(@PathVariable Long id, @RequestBody Set<Long> platformIds) {
+        return GameMapper.toResponse(gameService.assignPlatforms(id, platformIds));
     }
 
     @PutMapping("/{id}/genres")
-    public Game assignGenres(@PathVariable Long id, @RequestBody Set<Long> genreIds) {
-        return gameService.assignGenres(id, genreIds);
+    public GameResponse assignGenres(@PathVariable Long id, @RequestBody Set<Long> genreIds) {
+        return GameMapper.toResponse(gameService.assignGenres(id, genreIds));
     }
 }

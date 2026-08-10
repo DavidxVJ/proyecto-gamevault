@@ -8,6 +8,7 @@ import com.gamevault.repository.GameRepository;
 import com.gamevault.repository.GenreRepository;
 import com.gamevault.repository.PlatformRepository;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service //marca esta clase como un bean gestionado por Spring
+@Transactional//todos los métodos de este servicio tocan la base de datos y se benefician de estar dentro de una transacción bien definida
 public class GameService {
 
     //una vez asignado en el constructor, esta referencia no puede volver a cambiar
