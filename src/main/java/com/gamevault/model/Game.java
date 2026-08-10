@@ -2,9 +2,7 @@
 package com.gamevault.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,9 +11,13 @@ import java.util.Set;
 @Table(name = "games") //opcional. Por defecto Hibernate ocupa el nombre de la clase como nombre de la tabla
 
 //Lombok - libreria que elimina codigo repetitivo
-@Data //genera en tiempo de compilacion los getters, setters, equals, hashCode y toString
+//@Data //genera en tiempo de compilacion los getters, setters, equals, hashCode y toString
+@Getter
+@Setter
 @NoArgsConstructor //genera constructor no vacio
 @AllArgsConstructor //genera constructor con todos los parametros
+@ToString(exclude = {"platforms", "genres"})
+@EqualsAndHashCode(exclude = {"platforms", "genres"})
 public class Game {
 
     @Id //lave primaria

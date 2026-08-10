@@ -22,4 +22,4 @@
 
 #[1, 2]
 
-GET http://localhost:8080/api/platforms
+GET http://localhost:8080/api/genres
