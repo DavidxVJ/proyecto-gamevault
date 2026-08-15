@@ -17,7 +17,7 @@
 #  "name": "Accion"
 #}
 
-GET http://localhost:8080/api/genres
+GET http://localhost:8080/api/games
 
 #PUT http://localhost:8080/api/games/1/genres
 #Content-Type: application/json
