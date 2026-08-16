@@ -1,26 +1,19 @@
-#POST http://localhost:8080/api/games
-#Content-Type: application/json
-
-#{
-#  "title": "Elden Ring",
-#  "developer": "FromSoftware",
-#  "releaseYear": 2022,
-#  "description": "Un souls-like de mundo abierto"
-#}
-
-#GET http://localhost:8080/api/genres
-
-#POST http://localhost:8080/api/genres
-#Content-Type: application/json
-
-#{
-#  "name": "Accion"
-#}
-
-GET http://localhost:8080/api/games
+GET http://localhost:8080/api/game-entries/user/1
 
 #PUT http://localhost:8080/api/games/1/genres
 #Content-Type: application/json
 
 #[1, 2]
+
+#POST http://localhost:8080/api/game-entries
+#Content-Type: application/json
+
+#{
+#  "userId": 1,
+#  "gameId": 1,
+#  "status": "PLAYING",
+#  "rating": 9,
+#  "hoursPlayed": 45,
+#  "personalReview": "Excelente pero muy dificil"
+#}
 
