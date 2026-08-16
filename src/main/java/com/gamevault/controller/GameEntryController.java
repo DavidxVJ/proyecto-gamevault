@@ -4,6 +4,7 @@ import com.gamevault.dto.GameEntryMapper;
 import com.gamevault.dto.GameEntryRequest;
 import com.gamevault.dto.GameEntryResponse;
 import com.gamevault.service.GameEntryService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,11 @@ public class GameEntryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public GameEntryResponse create(@RequestBody GameEntryRequest request) {
+    //Valid: Cuando Spring recibe la petición, antes de ejecutar el método create() del controller, revisa las
+    // anotaciones de validación en GameEntryRequest (@NotNull, @Min, @Max). Si algo no cumple, Spring lanza
+    // automáticamente una MethodArgumentNotValidException sin que el código de negocio siquiera se ejecute — el
+    // GameEntryService.create() nunca llega a correr si los datos son inválidos.
+    public GameEntryResponse create(@Valid @RequestBody GameEntryRequest request) {
         return GameEntryMapper.toResponse(gameEntryService.create(request));
     }
 }
