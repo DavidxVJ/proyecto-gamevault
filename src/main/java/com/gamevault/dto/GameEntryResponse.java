@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//tiene username y gameTitle porque eso es lo útil para mostrar de vuelta, no tendría sentido devolver solo el userId cuando el cliente probablemente quiere ver el nombre
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

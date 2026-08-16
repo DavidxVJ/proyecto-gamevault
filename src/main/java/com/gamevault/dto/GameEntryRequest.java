@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//tiene userId y gameId, números — solo identificadores, porque eso es lo único que el cliente necesita mandar
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
