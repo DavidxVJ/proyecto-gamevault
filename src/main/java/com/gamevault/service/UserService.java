@@ -1,5 +1,6 @@
 package com.gamevault.service;
 
+import com.gamevault.exception.ResourceNotFoundException;
 import com.gamevault.model.User;
 import com.gamevault.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class UserService {
 
     public User findById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + id));
     }
 
     public User create(User user) {

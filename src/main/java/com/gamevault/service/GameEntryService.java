@@ -1,6 +1,8 @@
 package com.gamevault.service;
 
 import com.gamevault.dto.GameEntryRequest;
+import com.gamevault.exception.DuplicateResourceException;
+import com.gamevault.exception.ResourceNotFoundException;
 import com.gamevault.model.Game;
 import com.gamevault.model.GameEntry;
 import com.gamevault.model.User;
@@ -34,17 +36,17 @@ public class GameEntryService {
 
     public GameEntry create(GameEntryRequest request) {
         User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
         Game game = gameRepository.findById(request.getGameId())
-                .orElseThrow(() -> new RuntimeException("Juego no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Juego no encontrado"));
 
         //findByUserIdAndGameId(...) devuelve un Optional<GameEntry>. ifPresent(...) recibe una función que solo se
         //ejecuta si el Optional tiene un valor (es decir, si ya existe un registro previo). Si está vacío, simplemente
         //no hace nada y el código sigue de largo.
         gameEntryRepository.findByUserIdAndGameId(request.getUserId(), request.getGameId())
                 .ifPresent(existing -> {
-                    throw new RuntimeException("Este usuario ya tiene un registro para este juego");
+                    throw new DuplicateResourceException("Este usuario ya tiene un registro para este juego");
                 });
 
         GameEntry entry = new GameEntry();

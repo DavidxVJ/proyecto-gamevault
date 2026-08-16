@@ -1,6 +1,7 @@
 //Cerebro de la app. Reglas, validaciones, calculos, etc.
 package com.gamevault.service;
 
+import com.gamevault.exception.ResourceNotFoundException;
 import com.gamevault.model.Game;
 import com.gamevault.model.Genre;
 import com.gamevault.model.Platform;
@@ -44,7 +45,7 @@ public class GameService {
     //Si no existe, lanza una excepcion
     public Game findById(Long id) {
         return gameRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Juego no encontrado con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Juego no encontrado con id: " + id));
     }
 
     public Game create(Game game) {
