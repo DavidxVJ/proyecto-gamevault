@@ -1,19 +1,18 @@
-GET http://localhost:8080/api/game-entries/user/1
+#GET http://localhost:8080/api/games/9999
 
 #PUT http://localhost:8080/api/games/1/genres
 #Content-Type: application/json
 
 #[1, 2]
 
-#POST http://localhost:8080/api/game-entries
-#Content-Type: application/json
+POST http://localhost:8080/api/game-entries
+Content-Type: application/json
 
-#{
-#  "userId": 1,
-#  "gameId": 1,
-#  "status": "PLAYING",
-#  "rating": 9,
-#  "hoursPlayed": 45,
-#  "personalReview": "Excelente pero muy dificil"
-#}
+{
+  "userId": 1,
+  "gameId": 1,
+  "status": "COMPLETED",
+  "rating": 8,
+  "hoursPlayed": 60
+}
 

@@ -9,7 +9,8 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "password") //Esto es una medida de seguridad. Si algun dia se hace un Sout(user) para depurar,
+//no vamos a querer que la contraseña (aunque esté encriptada) aparezca en los logs.
 //usamos of en vez de exclude (es lo opuesto). Decimos "usa solo el campo id para calcular igualdad", en vez de excluir campos problemáticos.
 @EqualsAndHashCode(of = "id")
 public class User {
@@ -23,4 +24,7 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
 }
