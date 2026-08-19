@@ -9,12 +9,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.security.web.authentication.web.OncePerRequestFilter;
+//import org.springframework.security.web.authentication.web.OncePerRequestFilter;
+//Dependiendo de la version puede ser el de arriba o el de abajo
+import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Component
+//OPRF es una clase que Spring ejecuta una vez por cada petición HTTP, antes de que llegue al controller.
+//Intercepta el header Authorization, extrae el token, lo valida, y si es válido la dice a Spring "esta petición
+//viene de este usuario autenticado": todo esto ocurre antes de que el GameController o cualquier otro reciba la petición.
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
@@ -40,6 +45,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = authHeader.substring(7);
         String username = jwtService.extractUsername(token);
 
+        //SecurityContextHolder.getContext().setAuthentication(authToken): aqui es donde "registramos" en el
+        //contexto de seguridad de Spring que esta petición está autenticada como este usuario. A partir de este
+        // punto, cualquier código dentro de esa misma petición (el controller, el service) puede preguntar
+        //"¿quién está haciendo esta petición?" y obtener la respuesta.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
