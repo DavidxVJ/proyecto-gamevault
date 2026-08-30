@@ -57,4 +57,10 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(org.springframework.security.core.AuthenticationException.class)
+    public ResponseEntity<Map<String, Object>> handleAuthenticationError(
+            org.springframework.security.core.AuthenticationException ex) {
+        return buildResponse(HttpStatus.UNAUTHORIZED, "Credenciales inválidas");
+    }
 }
