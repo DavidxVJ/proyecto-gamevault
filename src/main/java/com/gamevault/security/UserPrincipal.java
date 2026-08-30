@@ -58,4 +58,8 @@ public class UserPrincipal implements UserDetails {
     public boolean isEnabled() { //¿la cuenta está activa (ej. no fue desactivada por un admin)?
         return true;
     }
+
+    public com.gamevault.model.User toUser() {
+        return user;
+    }
 }

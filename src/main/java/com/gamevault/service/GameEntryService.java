@@ -34,17 +34,14 @@ public class GameEntryService {
         return gameEntryRepository.findByUserId(userId);
     }
 
-    public GameEntry create(GameEntryRequest request) {
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
-
+    public GameEntry create(User user, GameEntryRequest request) {
         Game game = gameRepository.findById(request.getGameId())
-                .orElseThrow(() -> new ResourceNotFoundException("Juego no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Juego no encontrado con id: " + request.getGameId()));
 
         //findByUserIdAndGameId(...) devuelve un Optional<GameEntry>. ifPresent(...) recibe una función que solo se
         //ejecuta si el Optional tiene un valor (es decir, si ya existe un registro previo). Si está vacío, simplemente
         //no hace nada y el código sigue de largo.
-        gameEntryRepository.findByUserIdAndGameId(request.getUserId(), request.getGameId())
+        gameEntryRepository.findByUserIdAndGameId(user.getId(), request.getGameId())
                 .ifPresent(existing -> {
                     throw new DuplicateResourceException("Este usuario ya tiene un registro para este juego");
                 });

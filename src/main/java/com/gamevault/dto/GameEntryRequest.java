@@ -14,8 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GameEntryRequest {
 
-    @NotNull(message = "El id del usuario es obligatorio")
-    private Long userId;
+    //Eliminamos userId ya que vamos a obtener el usuario directamente del contexto de seguridad no del body.
+    //@NotNull(message = "El id del usuario es obligatorio")
+    //private Long userId;
 
     @NotNull(message = "El id del juego es obligatorio")
     private Long gameId;

@@ -3,9 +3,11 @@ package com.gamevault.controller;
 import com.gamevault.dto.GameEntryMapper;
 import com.gamevault.dto.GameEntryRequest;
 import com.gamevault.dto.GameEntryResponse;
+import com.gamevault.security.UserPrincipal;
 import com.gamevault.service.GameEntryService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,9 +23,9 @@ public class GameEntryController {
         this.gameEntryService = gameEntryService;
     }
 
-    @GetMapping("/user/{userId}")
-    public List<GameEntryResponse> getByUser(@PathVariable Long userId) {
-        return gameEntryService.findByUser(userId).stream()
+    @GetMapping("/me") //ya no se necesita pasar el ID de nadie por la URL, el sistema ya sabe quién eres por el token
+    public List<GameEntryResponse> getMyEntries(@AuthenticationPrincipal UserPrincipal principal) {
+        return gameEntryService.findByUser(principal.getId()).stream()
                 .map(GameEntryMapper::toResponse)
                 .collect(Collectors.toList());
     }
@@ -34,7 +36,10 @@ public class GameEntryController {
     // anotaciones de validación en GameEntryRequest (@NotNull, @Min, @Max). Si algo no cumple, Spring lanza
     // automáticamente una MethodArgumentNotValidException sin que el código de negocio siquiera se ejecute — el
     // GameEntryService.create() nunca llega a correr si los datos son inválidos.
-    public GameEntryResponse create(@Valid @RequestBody GameEntryRequest request) {
-        return GameEntryMapper.toResponse(gameEntryService.create(request));
+    public GameEntryResponse create(@AuthenticationPrincipal UserPrincipal principal,
+                                    @Valid @RequestBody GameEntryRequest request) {
+        return GameEntryMapper.toResponse(
+                gameEntryService.create(principal.toUser(), request)
+        );
     }
 }
