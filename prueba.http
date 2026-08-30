@@ -1,18 +1,24 @@
-GET http://localhost:8080/api/games/9999
+GET http://localhost:8080/api/games
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnYW1lcjEyMyIsImlhdCI6MTc4ODA2MjY3NiwiZXhwIjoxNzg4MTQ5MDc2fQ.W_swDoj92Rc9rFxwvYUwOFH4bkO3G_Jpk7Pi6O2huCCfo21WP3kZ7qyE97llvWCrk9w5L9sEs2eohO3BcgdIpQ
 
-#PUT http://localhost:8080/api/games/1/genres
+#PUT http://localhost:8080/api/games/1/platforms
+#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnYW1lcjEyMyIsImlhdCI6MTc4ODA2MjY3NiwiZXhwIjoxNzg4MTQ5MDc2fQ.W_swDoj92Rc9rFxwvYUwOFH4bkO3G_Jpk7Pi6O2huCCfo21WP3kZ7qyE97llvWCrk9w5L9sEs2eohO3BcgdIpQ
 #Content-Type: application/json
 
 #[1, 2]
 
 #POST http://localhost:8080/api/game-entries
+#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnYW1lcjEyMyIsImlhdCI6MTc4ODA2MjY3NiwiZXhwIjoxNzg4MTQ5MDc2fQ.W_swDoj92Rc9rFxwvYUwOFH4bkO3G_Jpk7Pi6O2huCCfo21WP3kZ7qyE97llvWCrk9w5L9sEs2eohO3BcgdIpQ
 #Content-Type: application/json
 
 #{
 #  "userId": 1,
 #  "gameId": 1,
-#  "status": "COMPLETED",
-#  "rating": 8,
-#  "hoursPlayed": 60
+#  "status": "PLAYING",
+#  "rating": 9,
+#  "hoursPlayed": 45,
+#  "personalReview": "Excelente pero muy dificil"
 #}
 
+#DELETE http://localhost:8080/api/games/2
+#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnYW1lcjEyMyIsImlhdCI6MTc4ODA2MjY3NiwiZXhwIjoxNzg4MTQ5MDc2fQ.W_swDoj92Rc9rFxwvYUwOFH4bkO3G_Jpk7Pi6O2huCCfo21WP3kZ7qyE97llvWCrk9w5L9sEs2eohO3BcgdIpQ
