@@ -79,4 +79,9 @@ class GameServiceTest {
         assertThat(result).isEqualTo(sampleGame);
         verify(gameRepository).save(sampleGame);
     }
+
+    @Test
+    void delete_delete_deberiaEliminarJuego_cuandoExiste(){
+        
+    }
 }
