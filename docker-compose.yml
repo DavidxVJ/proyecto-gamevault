@@ -5,8 +5,8 @@ services:
     container_name: gamevault-db
     environment: #define BD, user y pass que se crean automaticamente al arrancar
       POSTGRES_DB: gamevault
-      POSTGRES_USER: gamevault_user
-      POSTGRES_PASSWORD: gamevault_pass
+      POSTGRES_USER: ${DB_USERNAME:-gamevault_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-gamevault_pass}
     ports:
       - "5432:5432" #conecta puerto 5432 de mi maquina al puerto 5432 del contenedor (puerto default Postgres)
     volumes: #para que los datos no se borren cada vez que apague el contenedor
