@@ -81,7 +81,11 @@ class GameServiceTest {
     }
 
     @Test
-    void delete_delete_deberiaEliminarJuego_cuandoExiste(){
-        
+    void delete_deberiaEliminarJuego_cuandoExiste(){
+        when(gameRepository.findById(1L)).thenReturn(Optional.of(sampleGame));
+
+        gameService.delete(sampleGame.getId());
+
+        verify(gameRepository).delete(sampleGame);
     }
 }
