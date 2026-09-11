@@ -94,4 +94,6 @@ class GameEntryServiceTest {
         assertThatThrownBy(() -> gameEntryService.create(sampleUser, sampleRequest))
                 .isInstanceOf(DuplicateResourceException.class);
     }
+
+    //GameServiceTest y GameEntryServiceTest: pruebas unitarias. Empiezo con prueba de integracion.
 }
